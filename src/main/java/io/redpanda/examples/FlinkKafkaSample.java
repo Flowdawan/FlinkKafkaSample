@@ -40,7 +40,7 @@ public class FlinkKafkaSample {
 		properties.setProperty(MongoOptions.SINK_FLUSH_INTERVAL, String.valueOf(10_000L));
 		DataStream<String> text = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
 		// print out values of stream
-		text.sinkTo(new MongoSink<>("mongodb://mongodb", "local", "flinkcollection",
+		text.sinkTo(new MongoSink<>("mongodb://192.168.49.2:30000", "local", "flinkcollection",
 				new StringDocumentSerializer(), properties));
 		// Execute program
 		env.execute(jobTitle);
