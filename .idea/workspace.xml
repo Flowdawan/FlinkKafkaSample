@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ccaa692-bdf5-45e3-8af8-58d182d598ac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/FlinkKafkaSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/KafkaStream.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/StringDocumentSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/WordCount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/KafkaStream.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/StringDocumentSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/StringDocumentSerializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +72,7 @@
       <workItem from="1655574917004" duration="1424000" />
       <workItem from="1655577504606" duration="4201000" />
       <workItem from="1655583958206" duration="5228000" />
-      <workItem from="1655728206544" duration="1424000" />
+      <workItem from="1655728206544" duration="6905000" />
     </task>
     <servers />
   </component>

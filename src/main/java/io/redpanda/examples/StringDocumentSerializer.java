@@ -1,15 +1,20 @@
 package io.redpanda.examples;
 
-import com.esotericsoftware.minlog.Log;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonNode;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.Document;
 import org.mongoflink.serde.DocumentSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileReader;
+import java.lang.reflect.Type;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collection;
+import java.util.Map;
 
 
 public class StringDocumentSerializer implements DocumentSerializer {
@@ -18,10 +23,23 @@ public class StringDocumentSerializer implements DocumentSerializer {
     @Override
     public Document serialize(Object o) {
 
-        // Converting input into java object
-        Gson gson = new Gson();
-        KafkaStream ks = gson.fromJson(toString(), KafkaStream.class);
-        LOG.info(ks.getName());
+        // Json String to Object
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode rootNode = null;
+
+        String name = "";
+
+        try {
+            rootNode = mapper.readTree(o.toString());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        if (rootNode != null) {
+            String lastname = rootNode.findValue("name").findValue("first").toString();
+            String firstname = rootNode.findValue("name").findValue("last").toString();
+            name = lastname.concat(firstname);
+        }
 
         // creating the hash
         MessageDigest messageDigest = null;
@@ -30,15 +48,15 @@ public class StringDocumentSerializer implements DocumentSerializer {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        String myTestString = "test";
-        messageDigest.update(myTestString.getBytes());
+        messageDigest.update(name.getBytes());
         String stringHash = new String(messageDigest.digest());
-        LOG.info(stringHash);
 
         // creating the document for the mongodb
-        final Document doc = new Document("name", myTestString);
+        final Document doc = new Document("name", stringHash);
         final String jsonString = doc.toJson();
         final Document doc2 = Document.parse(jsonString);
+        LOG.info(String.valueOf(doc2));
+
         return doc2;
 
     }
