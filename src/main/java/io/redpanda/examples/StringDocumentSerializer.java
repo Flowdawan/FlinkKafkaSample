@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
@@ -28,6 +29,9 @@ public class StringDocumentSerializer implements DocumentSerializer {
         JsonNode rootNode = null;
 
         String name = "";
+        String age = "";
+        String country = "";
+        String postcode = "";
 
         try {
             rootNode = mapper.readTree(o.toString());
@@ -39,20 +43,30 @@ public class StringDocumentSerializer implements DocumentSerializer {
             String lastname = rootNode.findValue("name").findValue("first").toString();
             String firstname = rootNode.findValue("name").findValue("last").toString();
             name = lastname.concat(firstname);
+
+            age = rootNode.findValue("dob").findValue("age").toString();
+            country = rootNode.findValue("country").toString().replace("\"", "");
+            postcode = rootNode.findValue("postcode").toString();
+
         }
 
         // creating the hash
-        MessageDigest messageDigest = null;
+        MessageDigest digest = null;
         try {
-            messageDigest = MessageDigest.getInstance("SHA-256");
+            digest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        messageDigest.update(name.getBytes());
-        String stringHash = new String(messageDigest.digest());
+        byte[] hashName = digest.digest(name.getBytes(StandardCharsets.UTF_8));
+
+        /*
+        byte[] hashAge = digest.digest(age.getBytes(StandardCharsets.UTF_8));
+        byte[] hashCountry = digest.digest(country.getBytes(StandardCharsets.UTF_8));
+        byte[] hashPostcode = digest.digest(postcode.getBytes(StandardCharsets.UTF_8));
+        */
 
         // creating the document for the mongodb
-        final Document doc = new Document("name", stringHash);
+        final Document doc = new Document("name", hashName).append("age", age).append("country", country).append("postcode", postcode);
         final String jsonString = doc.toJson();
         final Document doc2 = Document.parse(jsonString);
         LOG.info(String.valueOf(doc2));

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2ccaa692-bdf5-45e3-8af8-58d182d598ac" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/FlinkKafkaSample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/FlinkKafkaSample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/StringDocumentSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/redpanda/examples/StringDocumentSerializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +72,8 @@
       <workItem from="1655577504606" duration="4201000" />
       <workItem from="1655583958206" duration="5228000" />
       <workItem from="1655728206544" duration="8774000" />
-      <workItem from="1655825207845" duration="1908000" />
+      <workItem from="1655825207845" duration="2766000" />
+      <workItem from="1656002975134" duration="1152000" />
     </task>
     <servers />
   </component>
